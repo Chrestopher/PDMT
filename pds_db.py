@@ -13,8 +13,23 @@ def get_all_pokemon():
     print(data)
 
 
+def get_one_pokemon_by_number(number):
+    get_one_pokemon_query = "SELECT name from pds WHERE pokedex_number = " + str(number)
+    cursor.execute(get_one_pokemon_query)
+    data = list(cursor.fetchall())
+    return data
+
+
+def get_one_pokemon_by_labels(weight, height, bts):
+    get_one_pokemon_query = "SELECT name from pds WHERE weight_kg = " + str(weight) + "and height_m = " + str(
+        height) + " and base_total = " + str(bts)
+    cursor.execute(get_one_pokemon_query)
+    data = list(cursor.fetchall())
+    return data
+
+
 def get_all_pokemon_column(column):
-    get_all_pokemon_query = "SELECT " + column + " FROM pds"
+    get_all_pokemon_query = "SELECT " + column + " FROM pds WHERE weight_kg IS NOT NULL"
 
     cursor.execute(get_all_pokemon_query)
     data = list(cursor.fetchall())
